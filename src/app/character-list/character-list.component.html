@@ -1,0 +1,22 @@
+<h2>Lista de Personajes</h2>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let character of characters">
+            <td>{{character.id}}</td>
+            <td>{{character.name}}</td>
+            <td>{{character.description}}</td>
+            <td><button (click)="getCharacterDetails(character.id)" class="btn btn-primary" style="margin-left : 10px">Detalles</button></td>
+        </tr>
+    </tbody>
+
+</table>
