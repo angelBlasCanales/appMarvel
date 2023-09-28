@@ -20,3 +20,22 @@
     </tbody>
 
 </table>
+
+<div class="modal" tabindex="-1" id="modalito">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Info</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="characterInfo">
+          <p><b>Id: </b>{{characterInfo.id}}</p>
+          <p><b>Nombre del personaje: </b>{{characterInfo.name}}</p>
+          <p><b>Descripción: </b>{{characterInfo.description}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="hideModalito()" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
