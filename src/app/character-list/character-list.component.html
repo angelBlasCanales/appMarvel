@@ -1,6 +1,6 @@
 <h2>Lista de Personajes</h2>
 
-<table class="table table-striped">
+<table *ngIf="!msjError" class="table table-striped">
     <thead class="table-dark">
         <tr>
             <th>ID</th>
@@ -21,7 +21,8 @@
 
 </table>
 
-<div class="modal" tabindex="-1" id="modalito">
+
+<div class="modal" tabindex="-1" id="modalInfo">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -34,8 +35,13 @@
           <p><b>Descripción: </b>{{characterInfo.description}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" (click)="hideModalito()" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" (click)="hideModal()" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
+  </div>
+
+
+  <div *ngIf="msjError" class="error-message">
+    <p>{{ msjError }}</p>
   </div>

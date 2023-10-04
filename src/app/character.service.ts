@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Character } from './character';
 import { Bitacora } from './bitacora';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,29 @@ export class CharacterService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getCharacterList():Observable<Character[]>{
-    return this.httpClient.get<Character[]>(`${this.baseURL}`);
+  getAllCharacters(): Observable<Character[] | string> {
+    return this.httpClient.get<Character[]>(`${this.baseURL}`).pipe(
+      map((response: Character[]) => {
+        return response;
+      }),
+      catchError((error: any) => {
+        if (error.status !== 200) {
+          return 'Ocurrió un error en la solicitud.'
+        }
+        throw error;
+      })
+    );
   }
 
-  getCharacterById(id:number):Observable<Character>{
-    return this.httpClient.get<Character>(`${this.baseURL}${id}`);
+  getCharacterById(id: number): Observable<Character | string> {
+    return this.httpClient.get<Character>(`${this.baseURL}${id}`).pipe(
+      catchError((error: any) => {
+        if (error.status !== 200) {
+          return 'Ocurrió un error en la solicitud.';
+        }
+        throw error;
+      })
+    );
   }
 
   getBitacoraList():Observable<Bitacora[]>{

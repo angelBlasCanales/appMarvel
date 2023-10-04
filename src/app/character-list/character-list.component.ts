@@ -11,6 +11,8 @@ import { Block } from '@angular/compiler';
 })
 export class CharacterListComponent implements OnInit {
 
+  msjError : string;
+
   characters:Character[];
 
   characterInfo:Character;
@@ -21,32 +23,37 @@ export class CharacterListComponent implements OnInit {
     this.getCharacters();
   }
 
-  private getCharacters(){
-    this.characterService.getCharacterList().subscribe(dato => {
-      this.characters = dato;
-    });
+  private getCharacters() {
+    this.characterService.getAllCharacters().subscribe(
+      (result: Character[] | string) => {
+        console.log('otro gato');
+        if (typeof result === 'string') {
+          this.msjError = 'Ocurrió un error en la solicitud.';
+        } else {
+          this.characters = result as Character[];
+        }
+      }
+    );
   }
-
   getCharacterDetails(id:number){
-   // this.router.navigate(['character-detail',id]);
-   var coso = document.getElementById("modalito");
-
-   this.characterInfo = new Character();
-
-    this.characterService.getCharacterById(id).subscribe(dato=>{
-      this.characterInfo = dato;
+    var modal = document.getElementById("modalInfo");
+    
+    this.characterService.getCharacterById(id).subscribe((result: Character | string) => {
+      if (typeof result === 'string') {
+        this.msjError = 'Ocurrió un error en la solicitud.';
+      } else {
+        this.characterInfo = result as Character;
+        if(modal != null){
+          modal.style.display="block";
+       }
+      }
     });
-
-   if(coso != null){
-    coso.style.display="block";
-   }
-
   }
 
-  hideModalito(){
-    var coso = document.getElementById("modalito");
-    if(coso != null){
-     coso.style.display="none";
+  hideModal(){
+    var modal = document.getElementById("modalInfo");
+    if(modal != null){
+      modal.style.display="none";
     }
   }
 
