@@ -26,7 +26,6 @@ export class CharacterListComponent implements OnInit {
   private getCharacters() {
     this.characterService.getAllCharacters().subscribe(
       (result: Character[] | string) => {
-        console.log('otro gato');
         if (typeof result === 'string') {
           this.msjError = 'Ocurrió un error en la solicitud.';
         } else {
