@@ -11,7 +11,7 @@ import { catchError, map } from 'rxjs/operators';
 export class CharacterService {
 
   //URL que obtiene todos los characters
-  private baseURL = "http://localhost:8080/marvel/characters/";
+  private baseURL = "http://localhost:8080/public/marvel/characters/";
 
   constructor(private httpClient : HttpClient) { }
 
