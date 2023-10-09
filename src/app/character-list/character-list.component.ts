@@ -3,6 +3,7 @@ import { CharacterService } from '../character.service';
 import { Character } from './../character'
 import { Component, OnInit } from '@angular/core';
 import { Block } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-character-list',
